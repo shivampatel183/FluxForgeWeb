@@ -16,8 +16,4 @@ export class LoginComponent {
   loginWithGithub(): void {
     window.location.href = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.AUTH.LOGIN}`;
   }
-
-  previewMode(): void {
-    this.auth.login('mock-jwt-token-for-preview');
-  }
 }

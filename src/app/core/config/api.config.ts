@@ -1,8 +1,8 @@
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost:5057/api',
+  BASE_URL: 'https://localhost:7074/api',
   ENDPOINTS: {
     AUTH: {
-      LOGIN: '/auth/login',
+      LOGIN: '/Auth/login',
       PROFILE: '/auth/profile',
     },
     PROJECTS: '/projects',

@@ -1,20 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './features/auth/login/login.component';
-import { DashboardComponent } from './features/dashboard/dashboard/dashboard.component';
 import { AuthService } from './core/services';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, LoginComponent, DashboardComponent],
-  template: `
-    @if (auth.token()) {
-    <app-dashboard />
-    } @else {
-    <app-login />
-    }
-  `,
+  imports: [CommonModule, LoginComponent],
+  template: `<app-login />`,
   styles: [],
 })
 export class AppComponent implements OnInit {
