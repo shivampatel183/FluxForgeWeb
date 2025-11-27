@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-[#0d1117] text-gray-300 flex font-sans">
+
+    <!-- Sidebar (Desktop) -->
+    <app-sidebar class="hidden md:flex" [user]="auth.currentUser()" (onLogout)="logout()">
+    </app-sidebar>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <div class="md:hidden border-b border-gray-700 bg-[#161b22] p-4 flex items-center justify-between">
+            <span class="text-lg font-bold text-white">FluxForge</span>
+            <button (click)="toggleMobileMenu()" class="text-gray-400 hover:text-white">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-6 md:p-12">
+            <div class="max-w-6xl mx-auto">
+
+                <!-- Header Row -->
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-white">Projects</h1>
+                        <p class="mt-1 text-gray-400">Manage your CI/CD pipelines and runners</p>
+                    </div>
+                    <button
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow-sm text-sm font-medium transition-colors flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        New Project
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <app-stats></app-stats>
+
+                <!-- Project List -->
+                <app-project-list [projects]="projectService.projects()" [isLoading]="projectService.isLoading()">
+                </app-project-list>
+
+            </div>
+        </main>
+    </div>
+</div>
