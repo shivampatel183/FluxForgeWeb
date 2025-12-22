@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../Services/auth.service';
+import { AuthService } from '../Auth/auth.service';
 
 @Component({
   selector: 'app-github-callback',

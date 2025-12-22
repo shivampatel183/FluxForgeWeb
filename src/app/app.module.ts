@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/signin/signin.component';
 import { GithubCallbackComponent } from './github-callback/github-callback.component';
+import { ToastComponent } from './common/components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GithubCallbackComponent } from './github-callback/github-callback.compo
     LoginComponent,
     RegisterComponent,
     GithubCallbackComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,

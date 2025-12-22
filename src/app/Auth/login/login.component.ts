@@ -1,30 +1,46 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../auth.service';
+import { ToastService } from '../../common/Services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginData = {
     email: '',
-    passwordHash: '', // Used as the password field
+    passwordHash: '',
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toast: ToastService
+  ) {}
 
   onLogin() {
     this.authService.login(this.loginData).subscribe({
-      next: (token) => {
-        console.log('Login successful, Token:', token);
-        localStorage.setItem('token', token); // Store JWT
-        // this.router.navigate(['/dashboard']);
+      next: (response: string) => {
+        if (
+          response === 'Invalid Credentials' ||
+          response === 'User Not Found' ||
+          response === 'Invalid Request'
+        ) {
+          this.toast.error(response);
+        } else {
+          this.toast.success('Login Successful! Redirecting...');
+          localStorage.setItem('token', response);
+          this.router.navigate(['/dashboard']);
+        }
       },
-      error: (err) => alert('Login failed: ' + err.error),
+      error: (err: any) => {
+        this.toast.error('Server error. Please try again later.');
+      },
     });
   }
 
