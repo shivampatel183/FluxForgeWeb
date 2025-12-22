@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
+  imports: [FormsModule],
   templateUrl: './signin.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./signin.component.css'],
 })
 export class RegisterComponent {
-  // Matches UserMainEntity
   registerData = {
     displayName: '',
     email: '',
