@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastComponent } from '../../common/components/toast/toast.component';
+import { ToastService } from '../../common/Services/toast.service';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, ToastComponent],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
@@ -16,15 +18,19 @@ export class RegisterComponent {
     passwordHash: '',
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   onRegister() {
     this.authService.register(this.registerData).subscribe({
       next: (response) => {
-        alert(response);
+        this.toastService.success('Registration successful!');
         this.router.navigate(['/login']);
       },
-      error: (err) => alert('Registration failed'),
+      error: (err) => this.toastService.error('Registration failed'),
     });
   }
 }

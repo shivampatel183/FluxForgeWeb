@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -23,26 +22,29 @@ export class ApiService {
     return headers;
   }
 
-  get(endpoint: string): Observable<any> {
+  get<T>(endpoint: string): Observable<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    return this.http.get(url, { headers: this.getHeaders() });
+    return this.http.get<T>(url, { headers: this.getHeaders() });
   }
 
-  post(endpoint: string, data: any): Observable<any> {
+  post<T>(endpoint: string, data: any): Observable<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    return this.http.post(url, data, {
+    return this.http.post<T>(url, data, {
       headers: this.getHeaders(),
-      responseType: 'text' as 'json',
     });
   }
 
-  put(endpoint: string, data: any): Observable<any> {
+  put<T>(endpoint: string, data: any): Observable<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    return this.http.put(url, data, { headers: this.getHeaders() });
+    return this.http.put<T>(url, data, {
+      headers: this.getHeaders(),
+    });
   }
 
-  delete(endpoint: string): Observable<any> {
+  delete<T>(endpoint: string): Observable<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    return this.http.delete(url, { headers: this.getHeaders() });
+    return this.http.delete<T>(url, {
+      headers: this.getHeaders(),
+    });
   }
 }

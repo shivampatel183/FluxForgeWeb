@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ToastService } from '../../common/Services/toast.service';
+import { ApiResponse } from '../../common/components/model/authmodel';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -25,16 +27,14 @@ export class LoginComponent {
 
   onLogin() {
     this.authService.login(this.loginData).subscribe({
-      next: (response: string) => {
-        if (
-          response === 'Invalid Credentials' ||
-          response === 'User Not Found' ||
-          response === 'Invalid Request'
-        ) {
-          this.toast.error(response);
+      next: (response: ApiResponse<string>) => {
+        debugger;
+        if (!response.success) {
+          this.toast.error(response.error || 'Login failed');
+          return;
         } else {
           this.toast.success('Login Successful! Redirecting...');
-          localStorage.setItem('token', response);
+          localStorage.setItem('token', response.data);
           this.router.navigate(['/dashboard']);
         }
       },

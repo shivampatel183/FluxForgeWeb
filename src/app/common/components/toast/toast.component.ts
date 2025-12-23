@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Toast, ToastService } from '../../Services/toast.service';
 
 @Component({
   selector: 'app-toast',
+  imports: [CommonModule],
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.css'],
 })

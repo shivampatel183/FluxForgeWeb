@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from '../common/Services/api.services';
+import { ApiResponse } from '../common/components/model/authmodel';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,8 @@ export class AuthService {
     return this.api.post('/Auth/Registration', user);
   }
 
-  login(user: any): Observable<any> {
-    return this.api.post('/Auth/Login', user);
+  login(user: any): Observable<ApiResponse<string>> {
+    return this.api.post<ApiResponse<string>>('/Auth/Login', user);
   }
 
   validateToken(): Observable<any> {
