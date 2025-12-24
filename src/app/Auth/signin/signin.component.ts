@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from '../../common/components/toast/toast.component';
 import { ToastService } from '../../common/Services/toast.service';
+import { ApiResponse } from '../../common/components/model/authmodel';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,11 @@ export class RegisterComponent {
 
   onRegister() {
     this.authService.register(this.registerData).subscribe({
-      next: (response) => {
+      next: (response: ApiResponse<string>) => {
+        if (!response.success) {
+          this.toastService.error(response.error || 'Registration failed');
+          return;
+        }
         this.toastService.success('Registration successful!');
         this.router.navigate(['/login']);
       },

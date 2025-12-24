@@ -28,7 +28,6 @@ export class LoginComponent {
   onLogin() {
     this.authService.login(this.loginData).subscribe({
       next: (response: ApiResponse<string>) => {
-        debugger;
         if (!response.success) {
           this.toast.error(response.error || 'Login failed');
           return;

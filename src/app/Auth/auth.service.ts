@@ -10,7 +10,7 @@ import { ApiResponse } from '../common/components/model/authmodel';
 export class AuthService {
   constructor(private api: ApiService, private router: Router) {}
 
-  register(user: any): Observable<any> {
+  register(user: any): Observable<ApiResponse<string>> {
     return this.api.post('/Auth/Registration', user);
   }
 
