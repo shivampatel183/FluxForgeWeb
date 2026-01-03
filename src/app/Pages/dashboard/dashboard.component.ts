@@ -21,10 +21,8 @@ export class DashboardComponent implements OnInit {
     this.authService.validateToken().subscribe({
       next: (response: any) => {
         this.message = 'Welcome! You are securely logged in.';
-        console.log('Token validated:', response);
       },
       error: (err: any) => {
-        console.error('Token invalid', err);
         this.authService.logout();
       },
     });

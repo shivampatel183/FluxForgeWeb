@@ -30,7 +30,9 @@ export class LoginComponent {
           this.toast.error(response.error || 'Login failed');
           return;
         } else {
-          this.toast.success('Login Successful! Redirecting...');
+          this.toast.success(
+            response.message || 'Login Successful! Redirecting...'
+          );
           localStorage.setItem('token', response.data);
           this.router.navigate(['/dashboard']);
         }

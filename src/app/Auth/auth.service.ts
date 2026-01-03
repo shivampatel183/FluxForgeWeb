@@ -27,8 +27,7 @@ export class AuthService {
   }
 
   initiateGithubLogin() {
-    this.api.get('/GithubAuth/github');
-    // window.location.href = 'https://localhost:7139/api/GithubAuth/github';
+    window.location.href = `${this.api.baseUrl}/GithubAuth/github`;
   }
 
   isLoggedIn(): boolean {
