@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ToastService } from '../../common/Services/toast.service';
 import { ApiResponse } from '../../common/components/model/authmodel';
+import { UserEntity } from '../auth.model';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,7 @@ import { ApiResponse } from '../../common/components/model/authmodel';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginData = {
-    email: '',
-    passwordHash: '',
-  };
+  loginData = new UserEntity();
 
   constructor(
     private authService: AuthService,
