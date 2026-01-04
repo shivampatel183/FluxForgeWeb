@@ -1,22 +1,11 @@
 <aside class="flex h-full w-64 flex-col border-r border-gray-800 bg-[#0d1117] text-gray-400">
 
-    <div class="flex h-16 items-center gap-3 border-b border-gray-800 px-6">
-        <div
-            class="flex h-8 w-8 items-center justify-center rounded bg-indigo-600 text-white shadow-lg shadow-indigo-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                stroke="currentColor" class="h-5 w-5">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-            </svg>
-        </div>
-        <span class="text-lg font-bold tracking-wide text-gray-100">FluxForge</span>
-    </div>
-
     <nav class="flex-1 space-y-1 overflow-y-auto px-3 py-4">
 
         <div class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-600">Platform</div>
 
         <a routerLink="/dashboard" routerLinkActive="bg-[#1f2937] text-white border-l-4 border-indigo-500 shadow-inner"
+            [routerLinkActiveOptions]="{ exact: true }"
             class="group flex cursor-pointer items-center rounded-r-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#161b22] hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor"
@@ -28,6 +17,7 @@
         </a>
 
         <a routerLink="/projects" routerLinkActive="bg-[#1f2937] text-white border-l-4 border-indigo-500"
+            [routerLinkActiveOptions]="{ exact: true }"
             class="group flex cursor-pointer items-center rounded-r-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#161b22] hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor"
@@ -39,6 +29,7 @@
         </a>
 
         <a routerLink="/users" routerLinkActive="bg-[#1f2937] text-white border-l-4 border-indigo-500"
+            [routerLinkActiveOptions]="{ exact: true }"
             class="group flex cursor-pointer items-center rounded-r-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#161b22] hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor"
@@ -63,4 +54,8 @@
             Settings
         </a>
     </div>
+    <button (click)="logout()"
+        class="m-4 w-[calc(100%-2rem)] rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
+        Logout
+    </button>
 </aside>

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ToastService } from '../../common/Services/toast.service';
 import { ApiResponse } from '../../common/components/model/authmodel';
-import { UserEntity } from '../auth.model';
+import { LoginEntity, UserMainEntity } from '../auth.model';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { UserEntity } from '../auth.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginData = new UserEntity();
+  loginData = new UserMainEntity();
 
   constructor(
     private authService: AuthService,
@@ -23,9 +23,16 @@ export class LoginComponent {
     private toast: ToastService
   ) {}
 
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+
   onLogin() {
     this.authService.login(this.loginData).subscribe({
-      next: (response: ApiResponse<string>) => {
+      next: (response: ApiResponse<LoginEntity>) => {
         if (!response.success) {
           this.toast.error(response.error || 'Login failed');
           return;
@@ -33,7 +40,9 @@ export class LoginComponent {
           this.toast.success(
             response.message || 'Login Successful! Redirecting...'
           );
-          localStorage.setItem('token', response.data);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('UserName', response.data.displayName);
+          localStorage.setItem('UserEmail', response.data.email);
           this.router.navigate(['/dashboard']);
         }
       },
