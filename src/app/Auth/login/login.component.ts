@@ -43,6 +43,7 @@ export class LoginComponent {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('UserName', response.data.displayName);
           localStorage.setItem('UserEmail', response.data.email);
+          localStorage.setItem('AvatarUrl', response.data.avatarUrl);
           this.router.navigate(['/dashboard']);
         }
       },

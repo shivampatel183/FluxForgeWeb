@@ -1,0 +1,12 @@
+<div class="flex">
+
+    <app-sidebar></app-sidebar>
+
+    <div class="min-h-screen flex-1 bg-gray-900 transition-all duration-300" [class.ml-64]="!layout.isCollapsed"
+        [class.ml-16]="layout.isCollapsed">
+        <div class="p-6 overflow-y-auto">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

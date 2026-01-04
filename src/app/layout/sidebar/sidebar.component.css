@@ -1,18 +1,105 @@
-/* Active sidebar item */
-.active-link {
-  background-color: #1f2937;
-  color: white;
-  border-left: 4px solid #6366f1;
-  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 20px rgba(99, 102, 241, 0.25);
-  transform: translateX(2px);
+/* Active menu item styling */
+:host-context(.active-menu-item) {
+  @apply !bg-[#1f2937] !text-gray-100 font-semibold shadow-sm border-l-4 border-indigo-500;
 }
 
-/* Smooth icon animation */
-.sidebar-icon {
-  transition: all 0.3s ease;
+.active-menu-item {
+  @apply bg-[#1f2937] text-gray-100 font-semibold shadow-sm border-l-4 border-indigo-500;
 }
 
-.active-link .sidebar-icon {
-  color: #818cf8;
-  transform: scale(1.1);
+.active-menu-item svg {
+  @apply text-indigo-400;
+}
+
+/* Active submenu item styling */
+.active-submenu-item {
+  @apply text-indigo-400 font-semibold bg-[#161b22];
+}
+
+.active-submenu-item .w-1\.5 {
+  @apply bg-indigo-400;
+}
+
+/* Smooth transitions */
+aside {
+  @apply overflow-hidden;
+}
+
+/* Scrollbar styling for menu */
+nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+nav::-webkit-scrollbar-track {
+  @apply bg-[#0d1117];
+}
+
+nav::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded;
+}
+
+nav::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+
+/* Animation for menu toggle */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+/* Submenu animation */
+.submenu-item {
+  animation: slideIn 0.2s ease-out;
+}
+
+/* Hover effects */
+a:hover svg,
+button:hover svg {
+  @apply scale-110 transition-transform duration-200;
+}
+
+/* Icon color transitions */
+svg {
+  @apply transition-colors duration-200;
+}
+
+/* Tooltip-like behavior for collapsed sidebar */
+aside[class*="w-20"] a,
+aside[class*="w-20"] button {
+  @apply relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  aside {
+    @apply shadow-xl;
+  }
+}
+
+/* Light mode border adjustments */
+aside {
+  @apply border-gray-200;
+}
+
+/* Group hover effects */
+.group:hover {
+  @apply bg-opacity-100;
 }

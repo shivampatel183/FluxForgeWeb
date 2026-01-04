@@ -1,61 +1,94 @@
-<aside class="flex h-full w-64 flex-col border-r border-gray-800 bg-[#0d1117] text-gray-400">
+<aside
+    class="fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] flex-col border-r border-gray-800 bg-[#0d1117] transition-all duration-300 ease-in-out shadow-sm"
+    [class.w-64]="!layout.isCollapsed" [class.w-20]="layout.isCollapsed">
 
-    <nav class="flex-1 space-y-1 overflow-y-auto px-3 py-4">
-
-        <div class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-600">Platform</div>
-
-        <a routerLink="/dashboard" routerLinkActive="bg-[#1f2937] text-white border-l-4 border-indigo-500 shadow-inner"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="group flex cursor-pointer items-center rounded-r-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#161b22] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor"
-                class="mr-3 h-5 w-5 text-gray-500 group-hover:text-white group-[.text-white]:text-indigo-400">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+    <!-- Header with Toggle Button -->
+    <div class="flex items-center justify-between border-b border-gray-800 px-4 py-4">
+        <h2 class="text-lg font-bold text-gray-100 transition-opacity duration-300"
+            [class.opacity-0]="layout.isCollapsed" [class.hidden]="layout.isCollapsed">
+            Menu
+        </h2>
+        <button (click)="layout.toggle()"
+            class="rounded-lg p-2 text-gray-400 transition-all duration-300 hover:bg-[#161b22] hover:text-gray-200"
+            [title]="layout.isCollapsed ? 'Expand' : 'Collapse'">
+            <svg class="h-5 w-5 transition-transform duration-300" [class.rotate-180]="layout.isCollapsed" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
-            Dashboard
-        </a>
+        </button>
+    </div>
 
-        <a routerLink="/projects" routerLinkActive="bg-[#1f2937] text-white border-l-4 border-indigo-500"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="group flex cursor-pointer items-center rounded-r-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#161b22] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor"
-                class="mr-3 h-5 w-5 text-gray-500 group-hover:text-white group-[.text-white]:text-indigo-400">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-            </svg>
-            Projects
-        </a>
+    <!-- Navigation Menu -->
+    <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-2">
+        <!-- Main Menu Items -->
+        <ng-container *ngFor="let item of menuItems">
+            <!-- Item with route -->
+            <ng-container *ngIf="!item.children">
+                <a [routerLink]="item.path" routerLinkActive="active-menu-item"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="group flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-gray-400 transition-all duration-200 hover:bg-[#161b22] hover:text-gray-200"
+                    [title]="layout.isCollapsed ? item.label : ''">
+                    <svg class="h-5 w-5 flex-shrink-0 transition-all duration-200" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            [attr.d]="getIcon(item.icon)" />
+                    </svg>
+                    <span class="transition-opacity duration-300" [class.opacity-0]="layout.isCollapsed"
+                        [class.hidden]="layout.isCollapsed">
+                        {{ item.label }}
+                    </span>
+                </a>
+            </ng-container>
 
-        <a routerLink="/users" routerLinkActive="bg-[#1f2937] text-white border-l-4 border-indigo-500"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="group flex cursor-pointer items-center rounded-r-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#161b22] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor"
-                class="mr-3 h-5 w-5 text-gray-500 group-hover:text-white group-[.text-white]:text-indigo-400">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-            </svg>
-            Users
-        </a>
+            <!-- Item with children (collapsible) -->
+            <ng-container *ngIf="item.children">
+                <button (click)="toggleMenu(item)"
+                    class="group flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium text-gray-400 transition-all duration-200 hover:bg-[#161b22] hover:text-gray-200"
+                    [title]="layout.isCollapsed ? item.label : ''">
+                    <div class="flex items-center gap-3">
+                        <svg class="h-5 w-5 flex-shrink-0 transition-all duration-200" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                [attr.d]="getIcon(item.icon)" />
+                        </svg>
+                        <span class="transition-opacity duration-300" [class.opacity-0]="layout.isCollapsed"
+                            [class.hidden]="layout.isCollapsed">
+                            {{ item.label }}
+                        </span>
+                    </div>
+                    <svg *ngIf="!layout.isCollapsed" class="h-4 w-4 transition-transform duration-300"
+                        [class.rotate-90]="item.isOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
 
+                <!-- Submenu Items -->
+                <div *ngIf="item.isOpen && !layout.isCollapsed"
+                    class="ml-2 space-y-1 border-l-2 border-gray-700 pl-2 transition-all duration-300">
+                    <a *ngFor="let child of item.children" [routerLink]="child.path"
+                        routerLinkActive="active-submenu-item" [routerLinkActiveOptions]="{ exact: true }"
+                        class="flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium text-gray-500 transition-all duration-200 hover:bg-[#161b22] hover:text-gray-300">
+                        <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+                        {{ child.label }}
+                    </a>
+                </div>
+            </ng-container>
+        </ng-container>
     </nav>
 
-    <div class="border-t border-gray-800 p-4">
-        <a routerLink="/settings"
-            class="group flex cursor-pointer items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[#161b22] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="mr-3 h-5 w-5 text-gray-500 group-hover:text-white">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.157.945c.07.42.35.753.738.878l.928.305a2.25 2.25 0 011.505 2.58l-.346 1.686c-.198.966.65 1.776 1.606 1.538l1.7-.425c.84-.21 1.64.42 1.64 1.285v1.198c0 .866-.8 1.495-1.64 1.285l-1.7-.425c-.956-.238-1.804.572-1.606 1.538l.346 1.686a2.25 2.25 0 01-1.505 2.58l-.928.305c-.388.125-.668.458-.738.878l-.157.945c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.02-.398-1.11-.94l-.157-.945c-.07-.42-.35-.753-.738-.878l-.928-.305a2.25 2.25 0 01-1.505-2.58l.346-1.686c.198-.966-.65-1.776-1.606-1.538l-1.7.425c-.84.21-1.64-.42-1.64-1.285v-1.198c0-.866.8-1.495 1.64-1.285l1.7.425c.956.238 1.804-.572 1.606-1.538l-.346-1.686a2.25 2.25 0 011.505-2.58l.928-.305c.388-.125.668-.458.738-.878l.157-.945z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <!-- Footer / Logout -->
+    <div class="border-t border-gray-800 px-3 py-4">
+        <button (click)="logout()"
+            class="group flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-red-600 transition-all duration-200 hover:bg-red-900 hover:bg-opacity-20"
+            [title]="layout.isCollapsed ? 'Logout' : ''">
+            <svg class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
-            Settings
-        </a>
+            <span class="transition-opacity duration-300" [class.opacity-0]="layout.isCollapsed"
+                [class.hidden]="layout.isCollapsed">
+                Logout
+            </span>
+        </button>
     </div>
-    <button (click)="logout()"
-        class="m-4 w-[calc(100%-2rem)] rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
-        Logout
-    </button>
 </aside>

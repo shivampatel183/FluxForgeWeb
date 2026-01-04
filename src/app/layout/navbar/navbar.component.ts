@@ -9,7 +9,9 @@ import { CookieService } from '../../common/Services/cookie.servies';
 })
 export class NavbarComponent {
   public userName: string | null = '';
+  public AvatarUrl: string = '';
   ngOnInit() {
     this.userName = localStorage.getItem('UserName');
+    this.AvatarUrl = localStorage.getItem('AvatarUrl') || '';
   }
 }

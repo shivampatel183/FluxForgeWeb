@@ -13,13 +13,20 @@ export class GithubRedirectComponent {
 
   ngOnInit(): void {
     const token = this.cookieService.getCookie('FluxForgeJwt');
+    const userName = this.cookieService.getCookie('UserName');
+    const UserEmail = this.cookieService.getCookie('UserEmail');
+    const avatarUrl = this.cookieService.getCookie('UserAvatar');
 
     if (token) {
       localStorage.setItem('token', token);
+      localStorage.setItem('UserName', userName || '');
+      localStorage.setItem('UserEmail', UserEmail || '');
+      localStorage.setItem('AvatarUrl', avatarUrl || '');
       this.router.navigate(['/dashboard']);
     } else {
       console.error('Login failed: Token cookie not found.');
       this.router.navigate(['/login']);
     }
+    this.cookieService.deleteCookie('FluxForgeJwt');
   }
 }

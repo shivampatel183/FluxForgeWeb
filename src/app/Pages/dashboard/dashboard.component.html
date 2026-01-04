@@ -1,5 +1,65 @@
-<div>
-    <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
-    <p class="mt-2 text-gray-600">Welcome to your dashboard! Here you can find an overview of your projects and
-        activities.</p>
+<div class="min-h-screen bg-gray-900 text-gray-200 p-6 md:p-10">
+
+    <!-- Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-semibold text-white">Dashboard</h1>
+        <p class="mt-1 text-sm text-gray-400">
+            Welcome back! Here’s an overview of your application.
+        </p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-lg bg-gray-800 p-4 shadow">
+            <p class="text-sm text-gray-400">Total Projects</p>
+            <p class="mt-1 text-2xl font-bold text-white">12</p>
+        </div>
+
+        <div class="rounded-lg bg-gray-800 p-4 shadow">
+            <p class="text-sm text-gray-400">Active Users</p>
+            <p class="mt-1 text-2xl font-bold text-white">248</p>
+        </div>
+
+        <div class="rounded-lg bg-gray-800 p-4 shadow">
+            <p class="text-sm text-gray-400">Completed Tasks</p>
+            <p class="mt-1 text-2xl font-bold text-white">1,024</p>
+        </div>
+
+        <div class="rounded-lg bg-gray-800 p-4 shadow">
+            <p class="text-sm text-gray-400">Pending Issues</p>
+            <p class="mt-1 text-2xl font-bold text-red-400">7</p>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+        <!-- Recent Activity -->
+        <div class="rounded-lg bg-gray-800 p-4 shadow">
+            <h2 class="mb-3 text-lg font-medium text-white">Recent Activity</h2>
+            <ul class="space-y-2 text-sm text-gray-400">
+                <li>• Project <span class="text-white">FluxForge</span> created</li>
+                <li>• New user registered</li>
+                <li>• GitHub OAuth login successful</li>
+                <li>• Settings updated</li>
+            </ul>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="rounded-lg bg-gray-800 p-4 shadow">
+            <h2 class="mb-3 text-lg font-medium text-white">Quick Actions</h2>
+            <div class="flex flex-wrap gap-3">
+                <button class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                    New Project
+                </button>
+                <button class="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600">
+                    View Users
+                </button>
+                <button class="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600">
+                    Settings
+                </button>
+            </div>
+        </div>
+
+    </div>
 </div>

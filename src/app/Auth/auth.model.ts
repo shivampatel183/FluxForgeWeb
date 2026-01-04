@@ -14,4 +14,5 @@ export class LoginEntity {
   token: string = '';
   displayName: string = '';
   email: string = '';
+  avatarUrl: string = '';
 }
