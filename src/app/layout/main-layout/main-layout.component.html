@@ -1,0 +1,15 @@
+<div class="min-h-screen bg-gray-50">
+
+    <app-navbar class="sticky top-0 z-50 w-full shadow-sm"></app-navbar>
+
+    <div class="flex">
+
+        <app-sidebar
+            class="hidden w-64 flex-none border-r border-gray-200 bg-white min-h-[calc(100vh-4rem)] md:block"></app-sidebar>
+
+        <div class="flex-1 p-6 md:p-10">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>
