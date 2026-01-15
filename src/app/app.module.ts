@@ -8,7 +8,7 @@ import { routes } from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/signin/signin.component';
-import { GithubCallbackComponent } from './github-callback/github-callback.component';
+import { GithubRedirectComponent } from './Pages/github-redirect/github-redirect.component';
 import { ToastComponent } from './common/components/toast/toast.component';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { ToastComponent } from './common/components/toast/toast.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    GithubCallbackComponent,
+    GithubRedirectComponent,
     ToastComponent,
   ],
   imports: [
