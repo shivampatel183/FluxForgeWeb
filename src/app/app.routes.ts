@@ -14,10 +14,6 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
-  {
-    path: 'github-redirect',
-    component: GithubRedirectComponent,
-  },
 
   {
     path: '',
